@@ -52,8 +52,8 @@ Traza:
 Caused by: java.io.FileNotFoundException: /tmp/blockmgr-42c7ebec-f738-4743-b4d2-0d5a668033dc/14/temp_shuffle_798bfac4-db6d-4f73-a64c-0deec367968c (No space left on device) at java.io.FileOutputStream.open0(Native Method)
 
 Links: https://forums.databricks.com/questions/277/how-do-i-avoid-the-no-space-left-on-device-error.html
-```
 
+```
 
 ## ESCRITURA
 
@@ -62,18 +62,24 @@ Como nota, escribir en parquet es mas rapido que realizar un count.
 
 ## OTRAS CONSIDERACIONES
 
-De cara a recursos vimos que es mas beneficioso incrementar numero de executors que cores por cada uno.
-Persist solo si se va a leer varias veces lo mismo.
-Kryo.
-Dividir en varios workflows (nosotros pasamos de 1 a 3: ingesta, primas y polizas).
+-De cara a recursos vimos que es mas beneficioso incrementar numero de executors que cores por cada uno.
 
-PROBLEMAS ENCONTRADOS CON SPARTA
+-Persist solo si se va a leer varias veces lo mismo.
+
+-Kryo.
+
+-Dividir en varios workflows (nosotros pasamos de 1 a 3: ingesta, primas y polizas).
+
+## PROBLEMAS ENCONTRADOS CON SPARTA
+
 -caducidad sesión
--problemas para encontrar errores, avisa en último paso de problemas previos (spark es lazy pero podrían
-mejor las trazas)
+
+-problemas para encontrar errores, avisa en último paso de problemas previos (spark es lazy pero podrían mejor las trazas)
+
 -seleccion indidual en lugar de múltiple
+
 -subworkflows para evitar repetir
--
+
 
 
 ## RESULTADOS
@@ -86,28 +92,28 @@ Nos, desde 2007: 2348 millones primas, 550 millones de polizas
 ```
 primas 11 años genera 2348
 primas 13 años generaria: -2770- (70 millones mas)
-```
+
 polizas 11 años genera: 550
 polizas 13 generaria: -651- (20 millones menos)
 ```
 
 ## QOL improv
+
 -crear entorno local, tanto un sql como un spark
 -count es lento, preferible tirar resultados a parquet temporal
+
 -variables entorno (ver si podemos separarlas de alguna manera)
+
 -automatizar cosas, eg: un wf parametrizable para ingestas de csv a parquet
 
 ## FIXES DESCUADRES:
+
 -hay calculos de mes dividiendo dias entre 30..
 -hay discards d eventos en alguna lectura de csv
+
 -hay que asegurar al validar que se parte de mismos csv DESGL etc
+
 -update de fecvencimiento en recibos
 
 
-
-
-
-
-
-
-
+WIP
