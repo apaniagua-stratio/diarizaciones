@@ -1,0 +1,12 @@
+spark.read.jdbc(url,"dbo.xpolizas_comun",opts).registerTempTable("xpolizas_comun")
+sql("""select 
+		apolclav,
+		case 
+			when FechaEntrada>date_format('2018-01-01 00:00:00', 'yyyy-MM-dd HH:mm:ss') then FechaEntrada
+			else date_format('2018-01-01 00:00:00', 'yyyy-MM-dd HH:mm:ss')
+		end as FechaEntradaEstudio,
+		FechaEntrada  
+	from 
+		xpolizas_comun xp
+    where FechaEntrada < date_format('2018-04-11 19:55:00', 'yyyy-MM-dd HH:mm:ss')""").registerTempTable("polizas_estudio")
+

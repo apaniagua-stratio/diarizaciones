@@ -1,0 +1,9 @@
+docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=zKMnkjvih4aB8SqT" --name "sql1" -p 1401:1433 -v /media/apaniagua/94ad4c94-fbee-41c4-93ce-25246bbfd2fb/extraccion_20180409/sql1data:/var/opt/mssql -d microsoft/mssql-server-linux:2017-latest
+
+.DAT van en: /media/apaniagua/94ad4c94-fbee-41c4-93ce-25246bbfd2fb/extraccion_20180409/sql1data/backup$
+
+
+
+
+
+
